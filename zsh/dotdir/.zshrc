@@ -1,0 +1,1 @@
+/afs/cs.stanford.edu/u/donovick/config/zsh/zshrc

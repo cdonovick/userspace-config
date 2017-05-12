@@ -1,0 +1,29 @@
+#!/bin/zsh
+source /afs/cs/etc/skel/.zshrc
+
+if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
+  . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# Lines configured by zsh-newuser-install
+HISTFILE=$CONFIG_PATH/zsh/history
+HISTSIZE=1000
+SAVEHIST=1000
+setopt notify
+unsetopt appendhistory autocd beep extendedglob
+bindkey -v
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+zstyle :compinstall filename '/afs/cs.stanford.edu/u/donovick/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+autoload -Uz promptinit
+promptinit
+
+PROMPT="%n@%m:%(5~|…/%4~|%~)%# "
+
+#load aliases
+source $CONFIG_PATH/shells/maps.sh

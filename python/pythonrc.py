@@ -1,47 +1,77 @@
 #wrap up everythin in a function for easy cleanup
 def _start_up():
+    #options
+    TAB_COMPLETE = True
+    HISTORY = True
+
+    PY_CONFIG_VAR = 'CONFIG_PYTHON'
+    GLOBAL_HISYOTY = '/history'
+    VIRTUAL_HISTORY = '/history'
+
 
     # enable syntax completion
-    try:
-        import readline
-    except ImportError:
-        print("Module readline not available. No tab completion")
-        return
+    if TAB_COMPLETE or HISTORY:
+        try:
+            import readline
+        except ImportError as e:
+            print("ERROR: module readline not available. No tab completion or history")
+            print(e)
+            return
+
     else:
+        return
+
+    if TAB_COMPLETE:
         import rlcompleter
-        print("Tab completion enabled")
         readline.parse_and_bind("tab: complete")
+        print("Tab completion enabled")
+
+    if not HISTORY:
+        return
 
     import os
     import atexit
     import sys
 
-    if sys.exec_prefix == '/usr':
-        #use default history
-        if 'CONFIG_PYTHON' in os.environ and os.environ['CONFIG_PYTHON'] is not None:
-            print('Using global history')
-            history_path = os.environ['CONFIG_PYTHON'] + '/history'
-        else:
-            print('CONFIG_PYTHON not set, cannot create history file')
-            return
-    else:
-        #use virtuel env history
+    #detect if running in a virtual env
+    if sys.prefix != sys.base_prefix or hasattr(sys, 'real_prefix'):
+        #use virtual env history
         print('Using virtual history')
-        history_path = sys.exec_prefix + '/history'
+        history_path = sys.exec_prefix + VIRTUAL_HISTORY
+
+    else:
+        #use default history
+        try:
+            history_path = os.environ[PY_CONFIG_VAR] + GLOBAL_HISYOTY
+            print('Using global history')
+        except KeyError as e:
+            print('ERROR: environmental var ' + PY_CONFIG_VAR + ' does not exist, cannot use global history file')
+            print(e)
+            return
+        except TypeError as e:
+            print('ERROR: environmental var ' + PY_CONFIG_VAR + ' not set, cannot use global history file')
+            print(e)
+            return
 
 
     if not os.path.isfile(history_path):
         try:
             with open(history_path, 'w'):
                 print('Creating history file: ' + history_path)
-        except FileNotFoundError:
-            print('File not found error when opening ' + history_path + ' for writing')
+        except FileNotFoundError as e:
+            print('ERROR: file not found error when opening ' + history_path + ' for writing')
+            print(e)
             return
-        except PermissionError:
-            print('Permission error when opening ' + history_path + ' for writing')
+        except PermissionError as e:
+            print('ERROR: permission error when opening ' + history_path + ' for writing')
+            print(e)
             return
     else:
-        print('History file: ' + history_path)
+        if os.access(history_path, os.W_OK | os.R_OK):
+            print('History file: ' + history_path)
+        else:
+            print('ERROR: history file (' + history_path + ') must be both readable and writable')
+            return
 
 
     def save_history(history_path=history_path):

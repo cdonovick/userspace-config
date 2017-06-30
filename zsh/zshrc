@@ -6,7 +6,7 @@ if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.
 fi
 
 # Lines configured by zsh-newuser-install
-HISTFILE=$CONFIG_PATH/zsh/history
+HISTFILE=$XDG_CONFIG_HOME/zsh/history
 HISTSIZE=1000
 SAVEHIST=1000
 setopt notify
@@ -26,4 +26,4 @@ promptinit
 PROMPT="%n@%m:%(5~|…/%4~|%~)%# "
 
 #load aliases
-source $CONFIG_PATH/shells/maps.sh
+source $XDG_CONFIG_HOME/shells/maps.sh

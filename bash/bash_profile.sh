@@ -1,5 +1,5 @@
 #!/bin/bash
-export XDG_CONFIG_HOME=~/userspace-config/
+export XDG_CONFIG_HOME=~/config/
 
 # load env
 source $XDG_CONFIG_HOME/shells/env.sh

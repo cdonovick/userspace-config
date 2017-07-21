@@ -8,7 +8,7 @@ export PYTHONSTARTUP=$CONFIG_PYTHON/pythonrc.py
 export EDITOR="vim"
 
 # Local Barrett specific
-case "$hostname" in
+case "$(hostname)" in
     *barrett*)
         export FAKE_ROOT=/barrett/scratch/donovick/root
         export PATH=$FAKE_ROOT/bin:$FAKE_ROOT/games:$PATH

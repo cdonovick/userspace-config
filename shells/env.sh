@@ -18,6 +18,8 @@ case "$(hostname)" in
 			export CXXFLAGS="-I ${FAKE_ROOT}/include ${CXXFLAGS}"
 			export CFLAGS="-I ${FAKE_ROOT}/include ${CFLAGS}"
 			export LDFLAGS="-L ${FAKE_ROOT}/lib ${LDFLAGS}"
+
+			export LD_LIBRARY_PATH=${FAKE_ROOT}/lib:$LD_LIBRARY_PATH
 		fi
         ;;
     *)

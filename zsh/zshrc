@@ -23,6 +23,28 @@ compinit
 autoload -Uz promptinit
 promptinit
 
+ZSH_CACHE_DIR=$XDG_CONFIG_HOME/zsh/cache
+#  :completion:<func>:<completer>:<command>:<argument>:<tag>
+#menu
+zstyle ':completion:*' menu select
+zstyle ':completion:*' list-colors ''
+
+#fuzz
+zstyle ':completion:*' completer _complete _correct #_approximate
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+#zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
+
+#cache
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path $ZSH_CACHE_DIR
+
+#ignore
+zstyle ':completion:*:*:*:*:*(files|directories)' ignored-patterns '(__pycache__|*.pyc)'
+
+# show ignored
+zstyle '*' single-ignored show
+
+
 PROMPT="%n@%m:%(5~|…/%4~|%~)%# "
 
 #load aliases

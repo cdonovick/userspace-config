@@ -27,3 +27,5 @@ man() {
     man "$@"
 }
 
+# color less
+alias less=less -R

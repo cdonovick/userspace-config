@@ -12,7 +12,7 @@ case "$(hostname)" in
     *barrett*)
 		if [ -z ${FAKE_ROOT+x} ]; then
 			export FAKE_ROOT=/barrett/scratch/donovick/root
-			export PATH=$FAKE_ROOT/bin:$FAKE_ROOT/games:$PATH
+			export PATH=$FAKE_ROOT/src/conda/miniconda3/bin:$FAKE_ROOT/bin:$FAKE_ROOT/games:$PATH
 			export MANPATH=$FAKE_ROOT/man:$MANPATH
 
 			export CXXFLAGS="-I ${FAKE_ROOT}/include ${CXXFLAGS}"

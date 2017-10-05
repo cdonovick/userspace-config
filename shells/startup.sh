@@ -3,10 +3,17 @@ source $XDG_CONFIG_HOME/shells/options.sh
 
 # attach to tmux
 if [[ ! $TERM =~ screen ]] && [[ $OPT_USE_TMUX -ne 0 ]]; then
+	if tmux info &> /dev/null; then
+		COMMAND=attach
+		FLAG=-t $OPT_TMUX_SESSION_NAME
+	else
+		COMMAND=new
+		FLAG=-s $OPT_TMUX_SESSION_NAME
+	fi
     if [ -n "$OPT_TMUX_SESSION_NAME" ]; then
-        tmux -2 attach -t $OPT_TMUX_SESSION_NAME || tmux -2 new -s $OPT_TMUX_SESSION_NAME
-    else
-        tmux -2 attach || tmux -2
+		tmux -2 $COMMAND $FLAG
+	else
+		tmux -2 $COMMAND
     fi
 fi
 

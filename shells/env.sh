@@ -7,6 +7,20 @@ export CONFIG_PYTHON=$XDG_CONFIG_HOME/python
 export PYTHONSTARTUP=$CONFIG_PYTHON/pythonrc.py
 export EDITOR="vim"
 
+p="38;2"			#prefix normal
+b="1;${p}"			#prefix bold
+fi_="${p};255;255;255" #file
+di_="${b};140;192;214"
+ln_="${p};0;244;254"
+pi_="${p};241;148;255"
+so_=${pi_}
+bd_="${p};168;152;255"
+cd_=${bd_}
+or_="${p};240;16;16"
+ex_="${b};66;211;27"
+
+export LS_COLORS=":fi=${fi_}:di=${di_}:ln=${ln_}:pi=${pi_}:so=${so_}:bd=${bd_}:cd=${cd_}:or=${or_}:ex=${ex_}"
+
 # Local Barrett specific
 case "$(hostname)" in
     *barrett*)

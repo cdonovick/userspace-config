@@ -2,7 +2,6 @@
 
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias lsa='ls -a --color=auto'
     alias lsl='ls -lh --color=auto'
@@ -28,4 +27,4 @@ man() {
 }
 
 # color less
-alias less=less -R
+alias less='less -R'

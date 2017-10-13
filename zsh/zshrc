@@ -10,7 +10,7 @@ HISTFILE=$XDG_CONFIG_HOME/zsh/history
 HISTSIZE=1000
 SAVEHIST=1000
 setopt inc_append_history #incremental history
-setopt share_history
+unsetopt share_history
 setopt hist_ignore_all_dups
 
 setopt notify
@@ -19,7 +19,7 @@ unsetopt autocd beep
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
-zstyle :compinstall filename '/afs/cs.stanford.edu/u/donovick/.zshrc'
+#zstyle :compinstall filename '/afs/cs.stanford.edu/u/donovick/.zshrc'
 
 autoload -Uz compinit
 compinit

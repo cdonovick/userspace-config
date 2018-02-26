@@ -3,9 +3,10 @@ def _start_up():
     #options
     TAB_COMPLETE = True
     HISTORY = True
+    USE_CONFIG_VAR = True
 
     PY_CONFIG_VAR = 'CONFIG_PYTHON'
-    GLOBAL_HISYOTY = '/history'
+    GLOBAL_HISTORY = '/history'
     VIRTUAL_HISTORY = '/history'
 
 
@@ -33,25 +34,29 @@ def _start_up():
     import atexit
     import sys
 
+
     #detect if running in a virtual env
-    if sys.prefix != sys.base_prefix or hasattr(sys, 'real_prefix'):
+    if  hasattr(sys, 'real_prefix') or (hasattr(sys, 'base_prefix') and sys.prefix != sys.base_prefix):
         #use virtual env history
         print('Using virtual history')
         history_path = sys.exec_prefix + VIRTUAL_HISTORY
 
     else:
         #use default history
-        try:
-            history_path = os.environ[PY_CONFIG_VAR] + GLOBAL_HISYOTY
-            print('Using global history')
-        except KeyError as e:
-            print('ERROR: environmental var ' + PY_CONFIG_VAR + ' does not exist, cannot use global history file')
-            print(e)
-            return
-        except TypeError as e:
-            print('ERROR: environmental var ' + PY_CONFIG_VAR + ' not set, cannot use global history file')
-            print(e)
-            return
+        if USE_CONFIG_VAR:
+            try:
+                history_path = os.environ[PY_CONFIG_VAR] + GLOBAL_HISTORY
+                print('Using global history')
+            except KeyError as e:
+                print('ERROR: environmental var ' + PY_CONFIG_VAR + ' does not exist, cannot use global history file')
+                print(e)
+                return
+            except TypeError as e:
+                print('ERROR: environmental var ' + PY_CONFIG_VAR + ' not set, cannot use global history file')
+                print(e)
+                return
+        else:
+            history_path = GLOBAL_HISTORY
 
 
     if not os.path.isfile(history_path):

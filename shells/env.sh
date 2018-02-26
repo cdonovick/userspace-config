@@ -1,11 +1,11 @@
 #!/bin/bash
-#for legacy reasons remove this soon
-export CONFIG_PATH=$XDG_CONFIG_HOME
 
 # PATHS
 export CONFIG_PYTHON=$XDG_CONFIG_HOME/python
 export PYTHONSTARTUP=$CONFIG_PYTHON/pythonrc.py
 export EDITOR="vim"
+export PATH=~/.local/bin:$PATH
+
 
 p="38;2"			#prefix normal
 b="1;${p}"			#prefix bold

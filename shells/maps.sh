@@ -28,3 +28,8 @@ man() {
 
 # color less
 alias less='less -R'
+
+# replace vim with nvim
+alias vim=nvim
+
+alias ssh='TERM=xterm ssh'

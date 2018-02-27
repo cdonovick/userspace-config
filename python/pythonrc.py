@@ -10,7 +10,6 @@ def _start_up():
     VIRTUAL_HISTORY = '/history'
 
 
-    # enable syntax completion
     if TAB_COMPLETE or HISTORY:
         try:
             import readline
@@ -22,6 +21,7 @@ def _start_up():
     else:
         return
 
+    # enable syntax completion
     if TAB_COMPLETE:
         import rlcompleter
         readline.parse_and_bind("tab: complete")

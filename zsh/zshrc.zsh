@@ -1,9 +1,5 @@
 #!/bin/zsh
-source /afs/cs/etc/skel/.zshrc
 
-if [[ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]]; then
-  . /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-fi
 
 # Lines configured by zsh-newuser-install
 HISTFILE=$XDG_CONFIG_HOME/zsh/history
@@ -17,16 +13,15 @@ setopt notify
 
 unsetopt autocd beep
 bindkey -e
-# End of lines configured by zsh-newuser-install
-# The following lines were added by compinstall
-#zstyle :compinstall filename '/afs/cs.stanford.edu/u/donovick/.zshrc'
-
 autoload -Uz compinit
 compinit
-# End of lines added by compinstall
 
 autoload -Uz promptinit
 promptinit
+
+# PIP completion
+eval "`pip completion --zsh`"
+
 
 setopt extended_glob
 ZSH_CACHE_DIR=$XDG_CONFIG_HOME/zsh/cache
@@ -54,5 +49,3 @@ zstyle '*' single-ignored show
 
 PROMPT="%n@%m:%(5~|…/%4~|%~)%# "
 
-#load aliases
-source $XDG_CONFIG_HOME/shells/maps.sh

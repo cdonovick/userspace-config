@@ -1,8 +1,0 @@
-#!/bin/zsh
-
-# load env
-export XDG_CONFIG_HOME=/barrett/scratch/donovick/config
-export ZDOTDIR=$XDG_CONFIG_HOME/zsh/dotdir
-
-# load env
-source $XDG_CONFIG_HOME/shells/env.sh

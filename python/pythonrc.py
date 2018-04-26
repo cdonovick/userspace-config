@@ -1,14 +1,28 @@
 #wrap up everythin in a function for easy cleanup
 def _start_up():
     #options
+    EXPORT_CLEAR = True
     TAB_COMPLETE = True
     HISTORY = True
     USE_CONFIG_VAR = True
 
+    SYS_CLEAR_CMD = 'clear'
     PY_CONFIG_VAR = 'CONFIG_PYTHON'
     GLOBAL_HISTORY = '/history'
     VIRTUAL_HISTORY = '/history'
 
+
+    if EXPORT_CLEAR:
+        import shutil
+        if  shutil.which(SYS_CLEAR_CMD) is None:
+            print('ERROR: SYS_CLEAR_CMD not available. ICLEAR not exported')
+        else:
+            global ICLEAR
+            def ICLEAR():
+                import os
+                _ = os.system(SYS_CLEAR_CMD)
+                del os
+        del shutil
 
     if TAB_COMPLETE or HISTORY:
         try:
@@ -87,6 +101,13 @@ def _start_up():
     readline.read_history_file(history_path)
     atexit.register(save_history)
 
-_start_up()
-del _start_up
+
+try:
+    _start_up()
+except Exception as e:
+    print('Uncaught Exception in start up script')
+    print(e)
+    del e
+finally:
+    del _start_up
 

@@ -13,3 +13,5 @@ source $XDG_CONFIG_HOME/bash/bashrc.sh
 # load aliases
 source $XDG_CONFIG_HOME/shells/maps.sh
 
+
+export PATH="$HOME/.cargo/bin:$PATH"

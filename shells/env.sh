@@ -3,8 +3,13 @@
 # PATHS
 export CONFIG_PYTHON=$XDG_CONFIG_HOME/python
 export PYTHONSTARTUP=$CONFIG_PYTHON/pythonrc.py
-export EDITOR="vim"
-export PATH=~/.local/bin:$PATH
+export EDITOR="nvim"
+export PATH=~/.local/bin:$XDG_CONFIG_HOME/shells/scripts/:/usr/local/bin/:$PATH
+export LD_LIBRARY_PATH=/usr/local/lib/:$LD_LIBRARY_PATH
+
+
+#Conda
+# source /home/donovick/bin/miniconda3/etc/profile.d/conda.sh
 
 
 p="38;2"			#prefix normal

@@ -1,0 +1,13 @@
+#!/bin/zsh
+dir="${PWD##*/}"
+if [ -z "$1" ] ; then
+	env_name="${dir}"
+else
+	env_name="$1"
+fi
+
+echo "python3 -m venv env-${env_name}"
+python3 -m venv "env-${env_name}"
+echo "source ./env-${env_name}/bin/activate"
+source ./env-${env_name}/bin/activate 
+pip install -U pip

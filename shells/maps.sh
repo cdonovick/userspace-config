@@ -33,3 +33,7 @@ alias less='less -R'
 alias vim=nvim
 
 alias ssh='TERM=xterm ssh'
+
+alias workon='. workon'
+alias newenv='. newenv'
+alias switch='. switch'

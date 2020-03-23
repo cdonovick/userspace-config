@@ -1,0 +1,42 @@
+#!/bin/zsh
+SEARCH_PATHS=(
+	"env"
+	"*env"
+	"env*"
+	"*env*"
+	"*"
+)
+
+WORK_PATH=~/work
+
+if [[ $# -eq 0 ]]; then
+	prefix="."
+	#first search for env-dirname
+	SEARCH_PATHS[1,0]="env-${PWD##*/}"
+else
+	#get first charcter of argument if to see if its a path
+	if [ ${1:0:1} = '.' ] || [ ${1:0:1} = '/' ]; then
+		prefix=$1
+	else
+		#if not a path assume its directory in WORK_PATH
+		prefix=$WORK_PATH/$1
+	fi
+	#first try env-dirname
+	SEARCH_PATHS[1,0]="env-$(basename $1)"
+fi
+
+for p in ${SEARCH_PATHS}; do
+	fp=$prefix/$p/bin/activate
+	if ls $~fp 1> /dev/null 2>&1; then
+		matches=$( ls $~fp | wc -l )
+		if [[ $matches -ne 1 ]]; then
+			echo "Mutiple virtual envs found matching ${fp}"
+			break
+		fi
+		for f in $~fp; do
+			echo "Entering $f"
+			source $f
+			break 2
+		done
+	fi
+done

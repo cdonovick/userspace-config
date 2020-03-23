@@ -8,3 +8,5 @@ source $XDG_CONFIG_HOME/shells/startup.sh
 
 # load aliases
 source $XDG_CONFIG_HOME/shells/maps.sh
+
+export PATH="$HOME/.cargo/bin:$PATH"
